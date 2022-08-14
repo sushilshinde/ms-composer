@@ -12,7 +12,7 @@ services:
     msa:
         build:
             context: git@github.com:sushilshinde/ms-a.git#main
-            dockerfile: Dockerfile
+            dockerfile: ./ms-a/Dockerfile
         image: msa
         ports:
             - "8000:3000"
@@ -21,7 +21,7 @@ services:
     msb:
         build:
             context: git@github.com:sushilshinde/ms-b.git#main
-            dockerfile: Dockerfile
+            dockerfile: ./ms-b/Dockerfile
         image: msb
         ports:
             - "9000:3000"
