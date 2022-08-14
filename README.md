@@ -1,5 +1,5 @@
 # Instrunctions 
 
 ```
-,/run.sh
+./run.sh
 ```
