@@ -1,21 +1,30 @@
 version: "3"
 services:
+
+    rabbit:
+        image: rabbitmq:3-management
+        deploy:
+            restart_policy:
+                condition: on-failure
+        ports:
+            - "5672:5672"
+            - "15672:15672"
     msa:
         build:
-          context: git@github.com:sushilshinde/ms-a.git#main
-          dockerfile: Dockerfile
+            context: git@github.com:sushilshinde/ms-a.git#main
+            dockerfile: Dockerfile
         image: msa
         ports:
-            - "9000:3000"
+            - "8000:3000"
         environment:
             - RABBIT_HOST=amqp://rabbit
     msb:
         build:
-          context: git@github.com:sushilshinde/ms-b.git#main
-          dockerfile: Dockerfile
+            context: git@github.com:sushilshinde/ms-b.git#main
+            dockerfile: Dockerfile
         image: msb
         ports:
-            - "8000:3000"
+            - "9000:3000"
         environment:
             - RABBIT_HOST=amqp://rabbit
             - POSTGRES_HOST=postgres
