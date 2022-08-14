@@ -1,0 +1,24 @@
+version: "3"
+services:
+    msa:
+        build:
+          context: git@github.com:sushilshinde/ms-a.git#main
+          dockerfile: Dockerfile
+        image: msa
+        ports:
+            - "9000:3000"
+        environment:
+            - RABBIT_HOST=amqp://rabbit
+    msb:
+        build:
+          context: git@github.com:sushilshinde/ms-b.git#main
+          dockerfile: Dockerfile
+        image: msb
+        ports:
+            - "8000:3000"
+        environment:
+            - RABBIT_HOST=amqp://rabbit
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_USER=admin
+            - POSTGRES_DB=postgres
